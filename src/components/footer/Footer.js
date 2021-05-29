@@ -17,18 +17,18 @@ const Footer = () => {
           </div>
           <div className="col-md-3 col-sm-4 col-6">
             <ul className="footer-menu my-3">
-              <li>menu1</li>
-              <li>menu2</li>
-              <li>menu3</li>
-              <li>menu4</li>
+              <li>About Online Food</li>
+              <li>Read Our Blog</li>
+              <li>Sign up to Deliver</li>
+              <li>Add your restarunt</li>
             </ul>
           </div>
           <div className="col-md-3 col-sm-4 col-6">
             <ul className="footer-menu my-3">
-              <li>menu5</li>
-              <li>menu6</li>
-              <li>menu7</li>
-              <li>menu8</li>
+              <li>Get Help</li>
+              <li>Read FAQs</li>
+              <li>View all Cities</li>
+              <li>Restarunts near me</li>
             </ul>
           </div>
         </div>

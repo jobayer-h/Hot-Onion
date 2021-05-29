@@ -22,7 +22,7 @@
   border-color: red;
 }
 .hero-search-btn {
-  margin-left: -26px;
+  margin-left: -50px;
   margin-bottom: 4px;
 }
 .hero-bg {
@@ -32,6 +32,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.product-card {
+  border-radius: 15px;
+  padding: 30px;
+}
+.product-card:hover {
+  box-shadow: 5px 5px 20px 0px #999999;
+  cursor: pointer;
+}
+
+.product-menu {
+  text-decoration: none;
+  padding: 5px 30px;
+  color: black;
+}
+.product-menu:hover {
+  color: red;
+  border-bottom: 2px solid red;
+}
+.product-menu-active {
+  color: red;
+  border-bottom: 2px solid red;
 }
 
 .icon-container {
