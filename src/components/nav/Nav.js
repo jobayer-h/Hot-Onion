@@ -2,6 +2,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Hamburger from "hamburger-react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import navLogo from "../../images/logo-nav.png";
 const Nav = () => {
   // eslint-disable-next-line
@@ -11,13 +12,13 @@ const Nav = () => {
     <section className="container">
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             <img
               className="img-fluid logo"
               src={logo}
               alt="Red Onion restrurent"
             />
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -38,16 +39,14 @@ const Nav = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/">
+                <Link className="nav-link active" to="/login">
                   Login
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
-                  <button className="btn btn-brand">
-                    Signup
-                  </button>
-                </a>
+                <Link className="nav-link" to="/signup">
+                  <button className="btn btn-brand">SignUp</button>
+                </Link>
               </li>
             </ul>
           </div>

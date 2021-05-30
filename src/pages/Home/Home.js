@@ -8,13 +8,13 @@ import './Home.css';
 
 const Home = () => {
     return (
-        <section>
+        <>
             <Nav />
             <Hero />
             <ProductSection />
             <WhyToChoose />
             <Footer />
-        </section>
+        </>
     );
 };
 
