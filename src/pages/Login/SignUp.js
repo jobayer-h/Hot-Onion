@@ -1,8 +1,59 @@
-import React from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { firebaseConfig } from "../../config/firebaseConfig";
 import logo from "../../images/logo-nav.png";
 import "./Login.css";
 const Login = () => {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const [newUser, setNewUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+      });
+    console.log("form submited");
+  };
+
+  const handleBlur = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === "email") {
+      const email = value;
+      setNewUser({
+        ...newUser,
+        email,
+      });
+    }
+    if (name === "password") {
+      const password = value;
+      setNewUser({
+        ...newUser,
+        password,
+      });
+    }
+  };
+
   return (
     <section className="login-bg">
       <div>
@@ -15,7 +66,11 @@ const Login = () => {
             />
           </Link>
         </div>
-        <form className="mx-auto" style={{ width: "300px" }}>
+        <form
+          className="mx-auto"
+          onSubmit={handleSubmit}
+          style={{ width: "300px" }}
+        >
           <div className="mb-3">
             <input
               type="text"
@@ -30,6 +85,7 @@ const Login = () => {
               className="form-control login-input"
               name="email"
               placeholder="Email"
+              onBlur={handleBlur}
             />
           </div>
           <div className="mb-3">
@@ -38,6 +94,7 @@ const Login = () => {
               className="form-control login-input"
               name="password"
               placeholder="Password"
+              onBlur={handleBlur}
             />
           </div>
           <div className="mb-3">
