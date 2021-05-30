@@ -1,14 +1,13 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { firebaseConfig } from "../../config/firebaseConfig";
+import { userContext } from "../../App";
 import logo from "../../images/logo-nav.png";
 import "./Login.css";
 const Login = () => {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+
+  const [logedInUser, setLogedInUser] =useContext(userContext);
 
   const [oldUser, setOldUser] = useState({
     email: "",
@@ -23,11 +22,11 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log(user);
+        setLogedInUser(user)
+        alert('logedIn Success')
         // ...
       })
       .catch((error) => {
-        var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage);
       });

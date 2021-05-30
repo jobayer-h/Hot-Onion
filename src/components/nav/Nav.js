@@ -1,12 +1,22 @@
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import firebase from "firebase/app";
 import Hamburger from "hamburger-react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../../App";
 import navLogo from "../../images/logo-nav.png";
 const Nav = () => {
   // eslint-disable-next-line
   const [logo, setLogo] = useState(navLogo);
+  const [logedInUser, setLogedInUser] = useContext(userContext);
+  const handleLogOut =() => {
+    firebase.auth().signOut().then(() => {
+      alert('signOut Success')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
 
   return (
     <section className="container">
@@ -29,7 +39,6 @@ const Nav = () => {
             aria-label="Toggle navigation"
           >
             <Hamburger />
-            {/* <span className="navbar-toggler-icon"></span> */}
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -38,16 +47,35 @@ const Nav = () => {
                   <FontAwesomeIcon icon={faShoppingCart} />
                 </a>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  <button className="btn btn-brand">SignUp</button>
-                </Link>
-              </li>
+
+              {
+                logedInUser.email ? 
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/">
+                      {logedInUser.email}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/">
+                      <button onClick={handleLogOut} className="btn btn-brand">Log Out</button>
+                    </Link>
+                  </li>
+                </>
+                : 
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link active" to="/login">
+                        Log In
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/signup">
+                        <button className="btn btn-brand">Sign Up</button>
+                      </Link>
+                    </li>
+                  </>
+              }
             </ul>
           </div>
         </div>

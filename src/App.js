@@ -1,24 +1,42 @@
+import firebase from "firebase/app";
+import { createContext, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import { firebaseConfig } from "./config/firebaseConfig";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/Login/SignUp";
+export const userContext = createContext();
 function App() {
   
+  const [logedInUser, setLogedInUser] = useState({});
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      setLogedInUser(user);
+    } else {
+      // No user is signed in.
+    }
+  });
+  console.log(logedInUser);
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-      </Switch>
-    </Router>
+    <userContext.Provider value={[logedInUser, setLogedInUser]}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+        </Switch>
+      </Router>
+    </userContext.Provider>
   );
 }
 

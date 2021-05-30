@@ -2,13 +2,10 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { firebaseConfig } from "../../config/firebaseConfig";
 import logo from "../../images/logo-nav.png";
 import "./Login.css";
 const Login = () => {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+  // 
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
@@ -26,7 +23,6 @@ const Login = () => {
         // ...
       })
       .catch((error) => {
-        var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage);
         // ..
