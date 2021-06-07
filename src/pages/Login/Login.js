@@ -2,12 +2,12 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toast';
 import { userContext } from "../../App";
 import logo from "../../images/logo-nav.png";
 import "./Login.css";
 const Login = () => {
-
-  const [logedInUser, setLogedInUser] =useContext(userContext);
+  const [logedInUser, setLogedInUser] = useContext(userContext);
 
   const [oldUser, setOldUser] = useState({
     email: "",
@@ -22,13 +22,13 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        setLogedInUser(user)
-        alert('logedIn Success')
+        setLogedInUser(user);
+        toast('Log In successfully!')
         // ...
       })
       .catch((error) => {
-        var errorMessage = error.message;
-        console.log(errorMessage);
+        let errorMessage = error.message;
+        
       });
   };
 

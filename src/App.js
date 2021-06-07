@@ -3,17 +3,17 @@ import { createContext, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { firebaseConfig } from "./config/firebaseConfig";
+import Dashbord from "./pages/Dashbord/Dashbord";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/Login/SignUp";
 export const userContext = createContext();
 function App() {
-  
   const [logedInUser, setLogedInUser] = useState({});
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       setLogedInUser(user);
     } else {
@@ -33,6 +33,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/dashbord">
+            <Dashbord />
           </Route>
         </Switch>
       </Router>

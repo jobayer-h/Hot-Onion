@@ -1,3 +1,4 @@
+
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import firebase from "firebase/app";
@@ -10,11 +11,14 @@ const Nav = () => {
   // eslint-disable-next-line
   const [logo, setLogo] = useState(navLogo);
   const [logedInUser, setLogedInUser] = useContext(userContext);
+
+
   const handleLogOut =() => {
     firebase.auth().signOut().then(() => {
-      alert('signOut Success')
+      
+      
     }).catch((error) => {
-      // An error happened.
+      
     });
   }
 
@@ -52,7 +56,7 @@ const Nav = () => {
                 logedInUser.email ? 
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">
+                    <Link className="nav-link" to="/dashbord">
                       {logedInUser.email}
                     </Link>
                   </li>

@@ -19,12 +19,12 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
-        console.log(user);
+        
         // ...
       })
       .catch((error) => {
         var errorMessage = error.message;
-        console.log(errorMessage);
+        
         // ..
       });
     console.log("form submited");
