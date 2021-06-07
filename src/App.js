@@ -6,6 +6,7 @@ import { firebaseConfig } from "./config/firebaseConfig";
 import Dashbord from "./pages/Dashbord/Dashbord";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import PriveteRoute from "./pages/Login/PriveteRoute";
 import SignUp from "./pages/Login/SignUp";
 export const userContext = createContext();
 function App() {
@@ -34,9 +35,9 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path="/dashbord">
+          <PriveteRoute path="/dashbord">
             <Dashbord />
-          </Route>
+          </PriveteRoute>
         </Switch>
       </Router>
     </userContext.Provider>

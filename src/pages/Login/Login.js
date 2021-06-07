@@ -1,8 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from 'react-toast';
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { userContext } from "../../App";
 import logo from "../../images/logo-nav.png";
 import "./Login.css";
@@ -13,7 +12,9 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  const history = useHistory();
+  const location = useLocation();
+  let { from } = location.state || { from: { pathname: "/" } }; 
   const handleLogIn = (e) => {
     e.preventDefault();
     firebase
@@ -23,7 +24,7 @@ const Login = () => {
         // Signed in
         var user = userCredential.user;
         setLogedInUser(user);
-        toast('Log In successfully!')
+        history.replace(from);
         // ...
       })
       .catch((error) => {

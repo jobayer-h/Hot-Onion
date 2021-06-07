@@ -1,8 +1,8 @@
 import React from "react";
 
-const AddProduct = () => {
+const ProductForm = ({action, name}) => {
   return (
-    <form class="row g-3">
+    <form class="row g-3" onSubmit={action} name={name}>
       <div class="col-md-6">
         <label for="item-name" class="form-label">
           Name
@@ -107,4 +107,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default ProductForm;
